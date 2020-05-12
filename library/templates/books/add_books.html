@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+{% extends "nav-librarian/nav-bar.html" %}
+{% load static %}
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap-grid.css' %}" />
+    <script src="{% static 'javascript/bootstrap.js' %}"></script>
+    <title></title>
+  </head>
+  <body>
+    {% block body_block %}
+    <div class="jumbotron">
+      <div class="container-fluid">
+        <div class="row justify-content-md-center">
+          <form class="" action="" method="post">
+            <div style="text-align:center" class="form-group">
+              {% csrf_token %}
+              {{ form.as_p }}
+              <button type="submit" class="btn btn-success" name="button">Submit</button>
+            </div>
+            </form>
+        </div>
+
+
+      </div>
+    </div>
+    {% endblock %}
+  </body>
+</html>

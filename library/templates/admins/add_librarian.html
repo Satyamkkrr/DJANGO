@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Librarian</title> <link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}" />
+    <script src="{% static 'javascript/adminlogin.js' %}"></script>
+</head>
+<body>
+{% block body_block %}
+    <div class="login-page">
+        <div class="form">
+          <div class="jumbotron">
+            <form class="submit-form" action="" method="post">
+              {% csrf_token %}
+              {{user_forms.as_p}}
+              {{form.as_p}}
+              <button type="submit">Submit</button>
+              <!-- <p class="message">Not registered? <a href="#">Create an account</a></p> -->
+            </form>
+          </div>
+        </div>
+      </div>
+      {% endblock %}
+</body>
+</html>

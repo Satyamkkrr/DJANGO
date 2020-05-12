@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title> <link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}" />
+    <script src="{% static 'javascript/adminlogin.js' %}"></script>
+</head>
+<body>
+    <div class="login-page">
+     <div class="form">
+          <form class="login-form" method="post" action="">
+            {% csrf_token %}
+            <input type="text" placeholder="Admin Name" name="username" required/>
+            <input type="password" placeholder="Password" name="password" required/>
+            <button>login</button>
+            <!-- <p class="message">Not registered? <a href="#">Create an account</a></p> -->
+          </form>
+        </div>
+      </div>
+</body>
+</html>

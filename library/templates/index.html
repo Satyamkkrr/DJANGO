@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/homepage.css' %}" />
+    <script src="{% static 'javascript/homepage.js' %}"></script>
+  </head>
+  <body>
+    <header class="header-fixed" style="background-color: rgb(198, 247, 253);">
+      <div class="header-limiter">
+        <h1>
+          <a href="#">NITJamshedpur <span>LIBRARY</span></a>
+        </h1>
+
+        <nav>
+
+          <a href="{% url 'admins:login' %}">Administrator</a>
+          <a href="{% url 'librarian:login' %}">Librarian</a>
+          <a href="{% url 'students:login' %}">Student</a>
+          <a href="/books">BOOKS</a>
+          <a href="/magazines">MAGAZINES</a>
+          <a href="/contact">CONTACT</a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- MAIN CONTENT HERE -->
+
+    <section class="hero">
+      <div class="hero-content">
+        <h1>Choose your favourite topic to study NOW</h1>
+        <h3>"Read and Issue Books,Get Magazines, and have fun!"</h3>
+      </div>
+    </section>
+
+    <main>
+      <div class="container">
+        <div class="jumbotron text-center">
+          <h3 style="color:rgb(187, 238, 238);background-color: darkblue;">Available Topics and Subjects</h3>
+
+          <section class="contained">
+            <div class="bg-clip">
+              Artificial Intelligence
+              <span>Theory Course</span>
+            </div>
+            <div
+              class="bg-clip"
+              style="background-image: url('https://rimaone.com/wp-content/uploads/2015/12/Header-rimaone.jpg')"
+            >
+              C,C++
+              <span>Programming</span>
+            </div>
+            <div class="bg-clip">
+              Python
+              <span>Programming</span>
+            </div>
+            <div
+              class="bg-clip"
+              style="background-image: url('https://rimaone.com/wp-content/uploads/2015/12/Header-rimaone.jpg')"
+            >
+              Cloud Computing
+              <span>Theory Course</span>
+            </div>
+            <div class="bg-clip">
+              Computer Networks
+              <span>Theory Course</span>
+            </div>
+            <div
+              class="bg-clip"
+              style="background-image: url('https://rimaone.com/wp-content/uploads/2015/12/Header-rimaone.jpg')"
+            >
+              Maths
+              <span>Integrals</span>
+            </div>
+            <div class="bg-clip">
+              Data Structures and Algorithms
+              <span>Programming</span>
+            </div>
+            <div
+              class="bg-clip"
+              style="background-image: url('https://rimaone.com/wp-content/uploads/2015/12/Header-rimaone.jpg')"
+            >
+              Databases
+              <span>Theory Course</span>
+            </div>
+            <div class="bg-clip">
+              Digital Logic
+              <span>Theory Course</span>
+            </div>
+            <div
+              class="bg-clip"
+              style="background-image: url('https://rimaone.com/wp-content/uploads/2015/12/Header-rimaone.jpg')"
+            >
+              Compiler Design and Automata
+              <span>Theory Course</span>
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+
+    <div id="mySidenav" class="sidenav">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+      <a href="/admin/adminlogin.html">Administrator</a>
+      <a href="/librarian/liblogin.html">Librarian</a>
+      <a href="/student/studlogin.html">Student</a>
+      <a href="/books">BOOKS</a>
+      <a href="/magaziness">MAGAZINES</a>
+      <a href="/contact">CONTACT</a>
+    </div>
+
+    <footer>
+      <div class="row inner">
+        <span class="copyright">
+          ©copyright 2020 NITJamshedpur LIBRARY
+        </span>
+
+        <span class="meta">
+          <ul class="links">
+            <a href="/admin/adminlogin.html">Administrator</a>
+            <a href="/librarian/liblogin.html">Librarian</a>
+            <a href="/student/studlogin.html">Student</a>
+            <a href="/books">BOOKS</a>
+            <a href="/magazines">MAGAZINES</a>
+            <a href="/contact">CONTACT</a>
+          </ul>
+          <ul class="icons">
+            <li>
+              <a
+                class="fab fa-2x fa-youtube-play"
+                href="https://www.youtube.com/"
+              ></a>
+            </li>
+            <li>
+              <a class="fab fa-2x fa-linkedin-square" href="#"></a>
+            </li>
+          </ul>
+        </span>
+      </div>
+    </footer>
+    <!--
+  Do not remove below content OR site will break.
+  -->
+    <div class="attribution">
+      <p>
+        Website designed and developed by
+        <strong
+          ><a
+            href="https://www.linkedin.com/in/nikhil-ranjan-niks/"
+            style="color:#ffffff;"
+            >NIKHIL RANJAN</a
+          ></strong
+        >
+      </p>
+    </div>
+
+    <span class="navside" onclick="openNav()">☰</span>
+  </body>
+</html>
