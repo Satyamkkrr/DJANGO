@@ -24,5 +24,5 @@ urlpatterns = [
     path('admins/', include('admins.urls')),
     path('librarian/', include('librarian.urls')),
     path('books/', include('books.urls')),
-#    path('students/', include('students.urls')),
+    path('students/', include('students.urls')),
 ]

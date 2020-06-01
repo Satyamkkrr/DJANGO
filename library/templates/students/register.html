@@ -4,19 +4,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Librarian</title> <link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}" />
+    <title></title> <link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}" />
     <script src="{% static 'javascript/adminlogin.js' %}"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+
 </head>
 <body>
 {% block body_block %}
     <div class="login-page">
+
         <div class="form">
           <div class="jumbotron">
+
+            <script type="text/javascript">
+            var check = function() {
+              var input=document.getElementById('id_password');
+              input.setAttribute('onkeyup', 'check();');
+if (document.getElementById('id_password').value ==
+  document.getElementById('id_confirm_password').value) {
+  document.getElementById('message').style.color = 'green';
+  document.getElementById('message').innerHTML = 'matching';
+  document.getElementById('submit').disable=false;
+} else {
+  document.getElementById('message').style.color = 'red';
+  document.getElementById('message').innerHTML = 'not matching';
+  document.getElementById('submit').disable=true;
+}
+}
+            </script>
             <form class="submit-form" action="" method="post">
+
               {% csrf_token %}
               {{user_forms.as_p}}
+              <span id="message" ></span>
               {{form.as_p}}
-              <button type="submit">Submit</button>
+              <button type="submit" id="submit">Submit</button>
               <!-- <p class="message">Not registered? <a href="#">Create an account</a></p> -->
             </form>
           </div>

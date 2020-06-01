@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 {% load static %}
+{% load custom_filters %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Librarian_Name</title>
     <link rel="stylesheet" type="text/css" href="{% static 'css/libpage.css' %}" />
-    <script src="{% static 'libpage.js' %}"></script>
+    <script src="{% static 'javascript/libpage.js' %}"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 </head>
 <body>
     <nav class="navbar navbar-inverse navbar-global navbar-fixed-top">
@@ -38,7 +40,7 @@
     <a href="#" class="btn-expand-collapse"><span class="glyphicon glyphicon-menu-left"></span></a>
     <ul class="navbar-primary-menu">
       <li>
-        <a href="#"><span class="glyphicon glyphicon-list-alt"></span><span class="nav-label">Dashboard</span></a>
+        <a href="{% url 'librarian:profile' %}"><span class="glyphicon glyphicon-list-alt"></span><span class="nav-label">Dashboard</span></a>
         <button class="dropdown-btn"><span class="glyphicon glyphicon-book"></span>  Books
             <i class="fa fa-caret-down"></i>
           </button>
@@ -48,13 +50,17 @@
             <a href="{% url 'books:list' %}">VIEW Books</a>
           </div>
         <a href="#"><span class="glyphicon glyphicon-cog"></span><span class="nav-label">Settings</span></a>
-        <a href="#"><span class="glyphicon glyphicon-film"></span><span class="nav-label">Notification</span></a>
-        <a href="#"><span class="glyphicon glyphicon-calendar"></span><span class="nav-label">Monitor</span></a>
+        {% if 1|numr > 0 %}
+        <a href="{% url 'librarian:notifications' %}" class="notification"><span class="glyphicon glyphicon-film"></span><span class="nav-label" style="padding: 1px;">Notification</span><span class="badge">{{1|numr}}</span></a>
+        {% else %}
+        <a href="{% url 'librarian:notifications' %}" class="notification"><span class="glyphicon glyphicon-film"></span><span class="nav-label" style="padding: 1px;">Notification</span><span class="badge"></span></a>
+        {% endif %}
+        <a href="{% url 'librarian:student_list' %}"><span class="glyphicon glyphicon-calendar"></span><span class="nav-label">Students</span></a>
       </li>
     </ul>
   </nav>
   <div class="main-content">
-    
+
     {% for q in query %}
   <h1> Welcome {{q.username}}</h1><br><br>
   {% endfor %}

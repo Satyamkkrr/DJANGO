@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+{% extends "nav-librarian/nav-bar.html" %}
+{% load static %}
+{% load polls_extras %}
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap-grid.css' %}"/>
+    <script src="{% static 'javascript/bootstrap.js' %}"></script>
+    <title></title>
+    <style media="screen">
+    .the-legend {
+      border-style: solid;
+      border-width: 2px;
+      font-size: 14px;
+      line-height: 20px;
+      margin-bottom: 2px;
+      width: auto;
+      padding: 0 10px;
+      border: 2px solid #000000;
+
+    }
+    .the-fieldset {
+      border: 5px solid #000000;
+      padding: 10px;
+    }
+    </style>
+  </head>
+  <body>
+    {% block body_block %}
+    {% if librarian %}
+        <div class="container-fluid">
+          <div class="jumbotron" style="border-radius: 50px">
+            <fieldset class="the-fieldset">
+            <legend class="the-legend" style="border-bottom: 2px solid #000000;"><strong>Student Details -</strong></legend>
+              <h3><strong>Name: </strong>{{student.user.first_name}}</h3>
+              <h3><strong>Roll No: </strong>{{student.roll_no}}</h3>
+              <h3><strong>Email: </strong>{{student.user.email}}</h3>
+              <h3><strong>Contact: </strong>{{student.contact}}</h3>
+              <h3><strong>Books Issued: </strong>{{student.no_of_books}}</h3>
+              <br>
+              <a href="{% url 'librarian:student_transaction' pk=student.pk %}"><button type="button"class="btn btn-warning" name="button">Active Transactions</button></a>
+              <a href="{% url 'librarian:student_previous_transaction' pk=student.pk %}"><button type="button" class="btn btn-warning" name="button">Previous Transactions</button></a>
+            </fieldset>
+          </div>
+        </div>
+      {% endif %}
+    {% endblock %}
+  </body>
+</html>

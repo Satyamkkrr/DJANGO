@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+{% extends "nav-librarian/nav-bar.html" %}
+{% load static %}
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap-grid.css' %}" />
+    <script src="{% static 'javascript/bootstrap.js' %}"></script>
+    <title></title>
+    <style media="screen">
+    .the-legend {
+  border-style: solid;
+  border-width: 2px;
+  font-size: 14px;
+  line-height: 20px;
+  margin-bottom: 2px;
+  width: auto;
+  padding: 0 10px;
+  border: 2px solid #000000;
+
+}
+.the-fieldset {
+  border: 5px solid #000000;
+  padding: 10px;
+}
+    </style>
+  </head>
+  <body>
+    {% block body_block %}
+      {% if student %}
+    <div class="container-fluid">
+      <div class="jumbotron" style="margin-top: 15px; background-color: #fcf8bd; opacity: 0.88;">
+      <form class="form-inline" action="" method="post">
+        <fieldset class="the-fieldset">
+        <legend class="the-legend" style="border-bottom: 2px solid #000000;">Add Request</legend>
+
+          {% csrf_token %}
+          <div class="form-group">
+            <label for="" class="" style="padding: 20px;" >Book Title:</label>
+            <input type="text" name="title" class="form-control" placeholder="Title" style="padding: 5px;" required>
+
+          </div>
+
+          <div class="form-group">
+            <label for="" class="" style="padding: 20px;" >Author:</label>
+            <input type="text" name="author" class="form-control" placeholder="Author" style="padding: 15px;" required>
+
+          </div>
+          <div class="form-group">
+            <label for="" class="" style="padding: 20px;">Publication:</label>
+
+                <input type="text" name="publications" class="form-control" placeholder="Publication" style="padding: 15px;" required>
+
+          </div>
+          <br>
+          <br>
+          <br>
+            <div class="form-group">
+              <label for="" class="control-label col-lg-2" >Comments:</label>
+              <div class="col-sm-10">
+                <textarea name="comments" class="form-control" rows="4" cols="80"  style="padding: 15px;"></textarea>
+              </div>
+            </div>
+            <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+              <button type="submit" class="btn btn-success">Submit</button>
+            </div>
+            </div>
+
+        </fieldset>
+        </form>
+      </div>
+      </div>
+        <div class="container-fluid">
+          <div class="jumbotron" style="margin-top: 15px; background-color: #fcf8bd; opacity: 0.88;">
+              <fieldset class="the-fieldset">
+                <legend class="the-legend" style="border-bottom: 2px solid #000000;">Previous Requests</legend>
+                <table class="table table-striped table-hover table-bordered">
+                  <thead>
+                    <th style="text-align:center" ><h4>TITLE</h5></th>
+                    <th style="text-align:center" ><h4>AUTHOR</h5></th>
+                    <th style="text-align:center" ><h4>PUBLICATION</h5></th>
+                  </thead>
+
+                {% for rb in RB %}
+                  <tbody>
+                    <tr>
+                      <td style="text-align:center" class="danger">{{rb.title}}</td>
+                      <td style="text-align:center" class="success">{{rb.author}}</td>
+                      <td style="text-align:center" class="danger">{{rb.publictions}}</td>
+                    </tr>
+                  </tbody>
+                {% endfor %}
+                </table>
+              </fieldset>
+          </div>
+
+        </div>
+      {% endif %}
+    {% endblock %}
+
+</body>
+</html>
