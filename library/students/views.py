@@ -58,7 +58,7 @@ class BookListView(ListView):
 def IssueBook(request, pk1, pk2):
     s=get_object_or_404(Student, pk=pk1)
     b=get_object_or_404(Books, pk=pk2)
-    if b.quantity > 0 and s.no_of_books < 4 :
+    if b.quantity > 0 and s.no_of_books < 3 :
         s.no_of_books+=1
         s.save()
         b.quantity-=1
