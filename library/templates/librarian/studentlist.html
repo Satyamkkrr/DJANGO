@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+{% extends "nav-librarian/nav-bar.html" %}
+{% load static %}
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap-grid.css' %}"/>
+    <script src="{% static 'javascript/bootstrap.js' %}"></script>
+    <title></title>
+  </head>
+  <body>
+    {% block body_block %}
+    {% if librarian %}
+      <script type="text/javascript">
+        function searchfun() {
+          var input=document.getElementById("searchbar").value.toUpperCase();
+          var ul= document.getElementById("my_ul");
+          var li= ul.getElementsByTagName("li");
+          for(var i=0; i<li.length; i++){
+            var roll=li[i].innerHTML;
+              if(roll.toUpperCase().indexOf(input) > -1 ){
+                li[i].style.display="";
+              }else{
+                li[i].style.display="none";
+              }
+            }
+          }
+
+
+      </script>
+      <div class="container-fluid" style="text-align: left; padding: 50px display: block-inline;">
+
+        <a href="{% url 'librarian:export' %}" style="background-color: blue; border-color: blue;"><button type="button" class="btn btn-success" name="button" style="background-color: blue; border-color: blue; padding: 10px; border-radius: 10px;"> <h3>Print Transaction</h3> </button></a>
+
+      </div>
+
+      <div class="container-fluid" style="text-align: right; padding: 10px; display: block-inline;">
+        <label for="searchbar" style="padding: 10px">Search:</label>
+        <input type="text" id="searchbar" onkeyup="searchfun();" placeholder="Search by Roll No." style="padding: 8px; width: 25%; border-radius: 16px; outline: none;">
+        <br>
+      </div>
+
+      <ul id="my_ul">
+      {% for stu in students %}
+          <li style="padding: 2px;"><a href="{% url 'librarian:student_detail' pk=stu.pk %}"><strong>{{stu.roll_no}}</strong></a></li>
+      {% endfor %}
+      </ul>
+      {% endif %}
+    {% endblock %}
+  </body>
+</html>

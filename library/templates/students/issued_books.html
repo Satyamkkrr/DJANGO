@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+{% extends "nav-librarian/nav-bar.html" %}
+{% load static %}
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap-grid.css' %}" />
+    <script src="{% static 'javascript/bootstrap.js' %}"></script>
+    <title></title>
+
+  </head>
+  <body>
+    {% block body_block %}
+      {% for book in IB %}
+      <div class="jumbotron" style="margin-top: 15px; background-color: #fcf8bd; opacity: 0.88; border-radius: 40px;">
+        <div class="container-fluid">
+          <div class="row justify-content-md-center">
+          <ul class="list-group list-group-flush" style="text-align:center">
+            <h1><strong>ISBN Code:</strong> {{book.books.isbn_code}}</h1>
+            <h3><strong>Title:</strong> {{book.books.name}}</h3>
+            <h3><strong>Author:</strong> {{book.books.author}}</h3>
+            <h3><strong>Publications:</strong> {{book.books.publications}}</h3>
+            <h3><strong>Subject:</strong> {{book.books.subject}}</h3>
+            <h3><strong>Date Of Issue:</strong> {{book.date}}</h3>
+            {% if book.dues > 0 %}
+            <h3><strong>Due on Book:</strong> <span style="color: red;">{{book.dues}}</span></h3>
+            {% endif %}
+          </ul>
+          </div>
+          {% if librarian and studentpk %}
+            <div class="" style="text-align: center; padding: 10px">
+              <a href="{% url 'librarian:return_book' pk1=studentpk pk2=book.books.pk %}"><button type="button" class="btn btn-danger" name="button" style="padding: 10px 40px;"><strong>Return Book</strong></button></a>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+      {% endfor %}
+    {% endblock %}
+</body>
+</html>

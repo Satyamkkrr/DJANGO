@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 {% extends "nav-librarian/nav-bar.html" %}
 {% load static %}
+{% load polls_extras %}
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
@@ -14,15 +15,47 @@
     {% block body_block %}
     {% if books %}
     <div class="container-fluid">
+      <script type="text/javascript">
+        function searchfun() {
+          var input=document.getElementById("searchbar").value.toUpperCase();
+          var myTable=document.getElementById("myTable");
+          var tr= myTable.getElementsByTagName("tr");
+          for(var i=0; i<tr.length; i++){
+            var tdname= tr[i].getElementsByTagName("td")[0];
+            var tdauthor= tr[i].getElementsByTagName("td")[1];
+            var tdisbn= tr[i].getElementsByTagName("td")[2];
+
+            if(tdname || tdauthor || tdisbn){
+              var name= tdname.innerHTML;
+              var author= tdauthor.innerHTML;
+              var isbn= tdisbn.innerHTML;
+              if(name.toUpperCase().indexOf(input) > -1 || author.toUpperCase().indexOf(input) > -1 || isbn.toUpperCase().indexOf(input) > -1){
+                tr[i].style.display="";
+              }else{
+                tr[i].style.display="none";
+              }
+            }
+          }
+        }
+
+      </script>
+
+      <div class="container-fluid" style="text-align: right; padding: 10px">
+        <label for="searchbar" style="padding: 10px">Search:</label>
+        <input type="text" id="searchbar" onkeyup="searchfun();" placeholder="Search by name, Author, Isbn Code" style="padding: 8px; width: 25%; border-radius: 16px; outline: none;">
+      </div>
       <div class="row justify-content-md-center">
-        <table class="table table-striped table-hover table-bordered">
+        <table class="table table-striped table-hover table-bordered" id="myTable">
           <thead>
-            <th style="text-align:center">Name</th>
+            <th style="text-align:center;">Name</th>
             <th style="text-align:center">Author</th>
             <th style="text-align:center">ISBN Code</th>
             {% if librarian %}
             <th style="text-align:center">Update</th>
             <th style="text-align:center">Delete</th>
+            {% endif %}
+            {% if student %}
+            <th style="text-align:center">Issue</th>
             {% endif %}
           </thead>
           <tbody>
@@ -39,7 +72,12 @@
 
               {% endif %}
                 {% if student %}
-                <td style="text-align:center" class="warning"><a href="{% url 'students:issuebook' pk1=user pk2=book.pk %}"><button type="button" name="button" class="btn btn-warning">Issue</button></a></td>
+                {% if book.pk|find:student_user.pk or book.quantity < 1 %}
+                  <td style="text-align:center" class="warning"><button type="button" onclick="alert('book already issued or currently unavailable')" name="button" class="btn">XXXX</button></td>
+                  {%else%}
+                    <td style="text-align:center" class="warning"><a href="{% url 'students:issuebook' pk1=student_user.pk pk2=book.pk %}"><button type="button" onclick="alert('book issued')" name="button" class="btn btn-warning">Issue</button></a></td>
+                  {% endif %}
+
                 {% endif %}
             </tr>
             {% endfor %}

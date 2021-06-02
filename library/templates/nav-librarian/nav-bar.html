@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 {% load static %}
+{% if librarian %}
+{% load custom_filters %}
+{% endif %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -10,6 +13,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
@@ -37,7 +41,7 @@
           </div><!--/.nav-collapse -->
         </div>
       </nav>
-  <nav class="navbar-primary">
+  <nav class="navbar-primary" style="position: fixed;">
     <a href="#" class="btn-expand-collapse"><span class="glyphicon glyphicon-menu-left"></span></a>
     <ul class="navbar-primary-menu">
       <li>
@@ -48,12 +52,25 @@
           <div class="dropdown-container">
             {% if librarian %}
             <a href="{% url 'books:create' %}">ADD Book</a>
-            {% endif %}
             <a href="{% url 'books:list' %}">VIEW Books</a>
+            {% endif %}
+
+            {% if student %}
+            <a href="{% url 'students:list' %}">VIEW Books</a>
+            <a href="{% url 'students:booklist' %}">ISSUED Books</a>
+            {% endif %}
           </div>
         <a href="#"><span class="glyphicon glyphicon-cog"></span><span class="nav-label">Settings</span></a>
-        <a href="#"><span class="glyphicon glyphicon-film"></span><span class="nav-label">Notification</span></a>
+        {% if librarian %}
+        {% if 1|numr > 0 %}
+        <a href="{% url 'librarian:notifications' %}" class="notification"><span class="glyphicon glyphicon-film"></span><span class="nav-label" style="padding: 1px;">Notification</span><span class="badge">{{1|numr}}</span></a>
+        {% else %}
+        <a href="{% url 'librarian:notifications' %}" class="notification"><span class="glyphicon glyphicon-film"></span><span class="nav-label" style="padding: 1px;">Notification</span><span class="badge"></span></a>
+        {% endif %}
+          <a href="{% url 'librarian:student_list' %}"><span class="glyphicon glyphicon-calendar"></span><span class="nav-label">Students</span></a>
+        {% else %}
         <a href="#"><span class="glyphicon glyphicon-calendar"></span><span class="nav-label">Monitor</span></a>
+        {% endif %}
       </li>
     </ul>
   </nav>
